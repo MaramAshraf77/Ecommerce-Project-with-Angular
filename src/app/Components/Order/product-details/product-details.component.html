@@ -1,0 +1,18 @@
+<div class="card m-2" style="width: 30%;">
+  <img class="card-img-top" [src]="prd?.imgURL" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{prd?.id}}</h5>
+    <h5 class="card-title">{{prd?.name}}</h5>
+    <div class="card-text">
+      <div>Price: {{prd?.price}}</div>
+      <div>Qaunity: {{prd?.quantity}} </div>
+    </div>
+    <hr>
+    <div class="btn-group" role="group" aria-label="Previous mixed styles example">
+      <button type="button" [disabled]="currPrdID==prdIDsListArr[0]" class="btn btn-danger" (click)="prevPrd()">Prev</button>
+      <button type="button" class="btn btn-warning" (click)="goBack()">Back</button>
+      <button type="button" [disabled]="currPrdID==prdIDsListArr[prdIDsListArr.length - 1]" class="btn btn-success" (click)="nextPrd()">Next</button>
+    </div>
+
+  </div>
+</div>

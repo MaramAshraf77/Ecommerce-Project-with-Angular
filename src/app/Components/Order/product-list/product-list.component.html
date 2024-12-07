@@ -1,0 +1,56 @@
+<!-- <div class="mb-3">
+  <label for="prdCat" class="form-label">Category:</label>
+  <select #cat class="form-control" name="cat" id="prdCat" (change)="getSelCat(cat.value)">
+  <select #cat class="form-control" name="cat" id="prdCat" [(ngModel)]="selectedCatID" (change)="filterProductByCatID()">
+    <option *ngFor="let cat of catlist" [value]="cat.id">{{cat.name}}</option>
+  </select>
+</div> -->
+<!-- <div class="text-secondary">
+  [To be Removed] For test:
+  {{selectedCatID}}
+  <br>
+  <button type="button" class="btn btn-primary btn-small" (click)="changeCat()">Change Category</button>
+   <br>
+   <div>
+     Order's Date:{{orderDate | date:'longDate'}}
+   </div>
+</div> -->
+<table class="table">
+  <thead class="bg-dark text-dark">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Image</th>
+      <th scope="col">Av. Quntity</th>
+      <th scope="col">Price</th>
+      <th scope="col">Needed</th>
+      <th scope="col">Details</th>
+      <th scope="col">Buy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- [class.d-none]="selectedCatID != prd.categoryID" -->
+    <tr *ngFor="let prd of prdListOfCat"
+    [style.background-color]="(prd.quantity==2)? 'yellow':'lightgray'">
+      <td>{{prd.id}}</td>
+      <td>{{prd.name}}</td>
+      <td><img LightBox highLightColor="red" [src]="prd.imgURL"></td>
+      <td>
+        <div *ngIf="prd.quantity == 2;else outOfScope">
+          {{prd.quantity}}
+        </div>
+        <ng-template #outOfScope>Out of scope</ng-template>
+      </td>
+      <td>{{prd.price | currency: 'EUR'}}</td>
+      <td><input #itemsCount class="form-control" type="number" ></td>
+      <!-- <td><button type="button" class="btn btn-secondary" (click)="buy(prd.price , itemsCount.value)">Buy</button></td>-->
+      <td><button type="button" class="btn btn-secondary" (click)="openprdDetails(prd.id)">Details</button></td>
+      <td><button type="button" class="btn btn-secondary" (click)="buyProduct(prd.id,prd.name , itemsCount.value ,prd.price)">Add to cart</button></td>
+    </tr>
+
+  </tbody>
+</table>
+<h3 class="text-danger">
+  [To be Removed] For Test:<br>
+  Order Total price: {{orderTotalPrice}}
+</h3>

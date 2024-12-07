@@ -1,0 +1,44 @@
+<h2> Create Your order</h2>
+<div class="mb-3">
+  <label for="prdCat" class="form-label">Category:</label>
+  <!--<select #cat class="form-control" name="cat" id="prdCat" (change)="getSelCat(cat.value)">-->
+  <select class="form-control" name="cat" id="prdCat" [(ngModel)]="selectedCatID" (change)="onCategoryChange()" >
+    <option value="0" selected>All</option>
+
+    <option *ngFor="let cat of catlist" [value]="cat.id">{{cat.name}}</option>
+  </select>
+</div>
+<hr>
+<div class="bg-warning">
+  <app-product-list [sentCatID]="selectedCatID" (orderdSelectedUser)="onbuyProduct($event)"></app-product-list>
+  <hr>
+</div>
+
+
+<table class="table">
+  <thead class="bg-dark text-dark">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Total</th>
+      <th scope="col">Needed</th>
+      <th scope="col">Remove</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- [class.d-none]="selectedCatID != prd.categoryID" -->
+    <tr *ngFor="let prd of recievedcartSelected">
+      <td>{{prd.id}}</td>
+      <td>{{prd.name}}</td>
+      <td>{{prd.price | currency: 'EUR'}}</td>
+      <!-- <td><button type="button" class="btn btn-secondary" (click)="buy(prd.price , itemsCount.value)">Buy</button></td>-->
+      <td></td>
+      <td>{{prd.count}}</td>
+      <td><button type="button" class="btn btn-secondary" (click)="remove(prd.id)">Remove</button></td>
+    </tr>
+
+  </tbody>
+</table>
+<button type="button" class="btn btn-secondary" (click)="orderTotalPrice()">PlacePrice</button>
+<h3>Order Total Price:{{OrderTotalPrice}}</h3>
